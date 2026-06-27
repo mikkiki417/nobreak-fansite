@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+nobreak_profile.pdf
+.vercel/
+.DS_Store
