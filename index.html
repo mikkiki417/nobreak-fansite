@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ノーブレーキのオリジンアワー 非公式ファンサイト</title>
+<meta name="description" content="FM那覇「ノーブレーキのオリジンアワー」全回を放送日順にまとめた非公式ファンサイト。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="badge">非公式ファンサイト</p>
+    <h1>ノーブレーキのオリジンアワー</h1>
+    <p class="lead">FM那覇 78.0MHz で放送中、ノーブレーキ（ポジティブあゆむ／ブーブー）がお届けする番組のアーカイブを、放送日順にまとめています。</p>
+    <div class="official">
+      <a href="https://www.youtube.com/@FMNAHA780live" target="_blank" rel="noopener">▶ FM那覇 公式チャンネル</a>
+      <a id="playlistLink" href="#" target="_blank" rel="noopener">▶ 公式再生リスト</a>
+      <a href="#about">ノーブレーキについて</a>
+      <a href="#people">出演者・スタッフ</a>
+    </div>
+    <p class="disclaimer">※当サイトはファンが運営する非公式アーカイブです。動画はすべてYouTube公式の埋め込みで表示しており、権利はFM那覇／オリジンコーポレーション等の権利者に帰属します。</p>
+  </div>
+</header>
+
+<nav class="toolbar wrap">
+  <input id="search" type="search" placeholder="🔍 キーワードで探す（タイトル・あらすじ・ゲスト）">
+  <button id="randomBtn" class="btn">🎲 ランダム再生</button>
+  <div id="stats" class="stats"></div>
+</nav>
+
+<div class="wrap">
+  <div id="yearTabs" class="tabs"></div>
+  <div id="tagBar" class="tagbar"></div>
+</div>
+
+<main id="list" class="wrap grid"></main>
+
+<section id="about" class="wrap about">
+  <h2>ノーブレーキについて</h2>
+  <div id="groupCard"></div>
+</section>
+
+<section id="people" class="wrap people">
+  <h2>出演者・スタッフ</h2>
+  <div id="peopleGrid" class="people-grid"></div>
+</section>
+
+<footer class="wrap foot">
+  <p>非公式ファンアーカイブ ／ データは公開動画から自動収集。誤りや掲載停止のご依頼はサイト管理者まで。</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
