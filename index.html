@@ -3,51 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ノーブレーキのオリジンアワー 非公式ファンサイト</title>
-<meta name="description" content="FM那覇「ノーブレーキのオリジンアワー」全回を放送日順にまとめた非公式ファンサイト。">
+<title>ノーブレーキ 応援サイト｜沖縄芸人コンビ 非公式ファンサイト</title>
+<meta name="description" content="沖縄芸人コンビ ノーブレーキを応援する非公式ファンサイト。ラジオ「ノーブレーキのオリジンアワー」全回アーカイブほか。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Mochiy+Pop+One&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <p class="badge">非公式ファンサイト</p>
-    <h1>ノーブレーキのオリジンアワー</h1>
-    <p class="lead">FM那覇 78.0MHz で放送中、ノーブレーキ（ポジティブあゆむ／ブーブー）がお届けする番組のアーカイブを、放送日順にまとめています。</p>
-    <div class="official">
-      <a href="https://www.youtube.com/@FMNAHA780live" target="_blank" rel="noopener">▶ FM那覇 公式チャンネル</a>
-      <a id="playlistLink" href="#" target="_blank" rel="noopener">▶ 公式再生リスト</a>
-      <a href="#about">ノーブレーキについて</a>
-      <a href="#people">出演者・スタッフ</a>
-    </div>
-    <p class="disclaimer">※当サイトはファンが運営する非公式アーカイブです。動画はすべてYouTube公式の埋め込みで表示しており、権利はFM那覇／オリジンコーポレーション等の権利者に帰属します。</p>
+
+<!-- ===== カバー（ファーストビュー） ===== -->
+<section class="cover">
+  <div class="titlebox">
+    <span class="spark s1">.*✦</span>
+    <h1 class="pixel-title">ノーブレーキ<br>おうえんサイト</h1>
+    <span class="spark s2">＊.</span>
   </div>
-</header>
 
-<nav class="toolbar wrap">
-  <input id="search" type="search" placeholder="🔍 キーワードで探す（タイトル・あらすじ・ゲスト）">
-  <button id="randomBtn" class="btn">🎲 ランダム再生</button>
-  <div id="stats" class="stats"></div>
-</nav>
+  <div class="pixdiv">✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿</div>
 
-<div class="wrap">
-  <div id="yearTabs" class="tabs"></div>
-  <div id="tagBar" class="tagbar"></div>
-</div>
+  <div class="welcome"><div class="welcome-track">♪ ノーブレーキ応援サイトへようこそ！ ゆっくり見ていってね♪ 沖縄芸人コンビ ノーブレーキ 非公式ファンサイト ♪ 　　</div></div>
 
-<main id="list" class="wrap grid"></main>
+  <p class="counter">あなたは <span id="hitcount" class="digits"></span> 人目のお客様です！</p>
 
-<section id="about" class="wrap about">
-  <h2>ノーブレーキについて</h2>
-  <div id="groupCard"></div>
+  <div class="kiriban">
+    <p class="kb1">キリ番を踏んだ方はリクエストをお願いします。</p>
+    <p class="kb2">踏み逃げ禁止！</p>
+    <p class="kb3">（次回のキリ番は 500 です♪）</p>
+  </div>
+
+  <nav class="cover-menu">
+    <a href="about.html">★ ノーブレーキについて</a>
+    <a href="origin.html">★ ラジオ「ノーブレーキのオリジンアワー」</a>
+    <a href="icharibar.html">★ ラジオ「いちゃりば　いちゃいちゃりばーさいど」</a>
+    <a href="works.html">★ 活動</a>
+  </nav>
+
+  <p class="cover-foot">- 非公式ファンサイト -</p>
 </section>
 
-<section id="people" class="wrap people">
-  <h2>出演者・スタッフ</h2>
-  <div id="peopleGrid" class="people-grid"></div>
-</section>
-
-<footer class="wrap foot">
-  <p>非公式ファンアーカイブ ／ データは公開動画から自動収集。誤りや掲載停止のご依頼はサイト管理者まで。</p>
+<footer class="foot">
+  <div class="wrap">
+    <p>沖縄芸人コンビ ノーブレーキ 非公式ファンサイト</p>
+    <p class="disc">※当サイトはファンが運営する非公式サイトです。動画はすべてYouTube公式の埋め込みで表示しており、権利はFM那覇／オリジン等の権利者に帰属します。掲載内容の修正・停止のご依頼はサイト管理者まで。</p>
+  </div>
 </footer>
 
 <script src="data.js"></script>

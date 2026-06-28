@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
 nobreak_profile.pdf
+font_compare.html
 .vercel/
 .DS_Store
