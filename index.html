@@ -1,55 +1,63 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ノーブレーキ 応援サイト｜沖縄芸人コンビ 非公式ファンサイト</title>
+<title>ノーブレーキ おうえんサイト｜沖縄芸人コンビ 非公式ファンサイト</title>
 <meta name="description" content="沖縄芸人コンビ ノーブレーキを応援する非公式ファンサイト。ラジオ「ノーブレーキのオリジンアワー」全回アーカイブほか。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Mochiy+Pop+One&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
+<div class="layout">
 
-<!-- ===== カバー（ファーストビュー） ===== -->
-<section class="cover">
-  <div class="titlebox">
-    <span class="spark s1">.*✦</span>
-    <h1 class="pixel-title">ノーブレーキ<br>おうえんサイト</h1>
-    <span class="spark s2">＊.</span>
+  <aside class="sidebar">
+    <a class="side-logo" href="index.html">ノーブレーキ<br>おうえんサイト</a>
+    <nav class="side-nav">
+      <a href="index.html" class="cur">HOME</a>
+      <a href="about.html">ABOUT<small>ノーブレーキについて</small></a>
+      <a href="origin.html">オリジンアワー</a>
+      <a href="icharibar.html">いちゃりば</a>
+      <a href="works.html">活動</a>
+    </nav>
+    <div class="bgm">BGM <button id="bgmOn">ON</button><button id="bgmOff" class="act">OFF</button></div>
+    <audio id="bgm" loop></audio>
+  </aside>
+
+  <div class="main">
+    <section class="cover">
+      <div class="titlebox">
+        <span class="spark s1">.*✦</span>
+        <h1 class="pixel-title">ノーブレーキ<br>おうえんサイト</h1>
+        <span class="spark s2">＊.</span>
+      </div>
+
+      <div class="pixdiv">✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿</div>
+
+      <div class="welcome"><div class="welcome-track">♪ ノーブレーキ応援サイトへようこそ！ ゆっくり見ていってね♪ 沖縄芸人コンビ ノーブレーキ 非公式ファンサイト ♪ 　　</div></div>
+
+      <p class="counter">あなたは <span id="hitcount" class="digits"></span> 人目のお客様です！</p>
+
+      <div class="kiriban">
+        <p class="kb1">キリ番を踏んだ方はリクエストをお願いします。</p>
+        <p class="kb2">踏み逃げ禁止！</p>
+        <p class="kb3">（次回のキリ番は 500 です♪）</p>
+      </div>
+
+      <p class="cover-foot">- 非公式ファンサイト -</p>
+    </section>
+
+    <footer class="foot"><div class="wrap">
+      <p>沖縄芸人コンビ ノーブレーキ 非公式ファンサイト</p>
+      <p class="disc">※当サイトはファンが運営する非公式サイトです。動画はすべてYouTube公式の埋め込みで表示しており、権利は権利者に帰属します。</p>
+    </div></footer>
   </div>
 
-  <div class="pixdiv">✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿ × ✿</div>
+</div>
 
-  <div class="welcome"><div class="welcome-track">♪ ノーブレーキ応援サイトへようこそ！ ゆっくり見ていってね♪ 沖縄芸人コンビ ノーブレーキ 非公式ファンサイト ♪ 　　</div></div>
-
-  <p class="counter">あなたは <span id="hitcount" class="digits"></span> 人目のお客様です！</p>
-
-  <div class="kiriban">
-    <p class="kb1">キリ番を踏んだ方はリクエストをお願いします。</p>
-    <p class="kb2">踏み逃げ禁止！</p>
-    <p class="kb3">（次回のキリ番は 500 です♪）</p>
-  </div>
-
-  <nav class="cover-menu">
-    <a href="about.html">★ ノーブレーキについて</a>
-    <a href="origin.html">★ ラジオ「ノーブレーキのオリジンアワー」</a>
-    <a href="icharibar.html">★ ラジオ「いちゃりば　いちゃいちゃりばーさいど」</a>
-    <a href="works.html">★ 活動</a>
-  </nav>
-
-  <p class="cover-foot">- 非公式ファンサイト -</p>
-</section>
-
-<footer class="foot">
-  <div class="wrap">
-    <p>沖縄芸人コンビ ノーブレーキ 非公式ファンサイト</p>
-    <p class="disc">※当サイトはファンが運営する非公式サイトです。動画はすべてYouTube公式の埋め込みで表示しており、権利はFM那覇／オリジン等の権利者に帰属します。掲載内容の修正・停止のご依頼はサイト管理者まで。</p>
-  </div>
-</footer>
-
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

@@ -139,4 +139,17 @@
     cEl.innerHTML = [...s].map((d, i) =>
       `<span class="dgt${i === s.length - 1 ? " hot" : ""}">${d}</span>`).join("");
   }
+
+  /* ===== BGM ON/OFF（音源を入れたら再生。未設定なら表示だけ） ===== */
+  const bgmOn = $("#bgmOn"), bgmOff = $("#bgmOff"), bgm = $("#bgm");
+  if (bgmOn && bgmOff) {
+    bgmOn.addEventListener("click", () => {
+      bgmOn.classList.add("act"); bgmOff.classList.remove("act");
+      if (bgm && (bgm.currentSrc || bgm.src)) bgm.play().catch(() => {});
+    });
+    bgmOff.addEventListener("click", () => {
+      bgmOff.classList.add("act"); bgmOn.classList.remove("act");
+      if (bgm) bgm.pause();
+    });
+  }
 })();
