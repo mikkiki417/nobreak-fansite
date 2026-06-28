@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -7,32 +7,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Mochiy+Pop+One&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-<header class="pagehead">
-  <a class="ph-title" href="index.html">★ ノーブレーキ おうえんサイト</a>
-  <nav class="ph-nav">
-    <a href="about.html">ノーブレーキについて</a>
-    <a href="origin.html">オリジンアワー</a>
-    <a href="icharibar.html" class="cur">いちゃりば</a>
-    <a href="works.html">活動</a>
-    <a href="index.html">🏠トップ</a>
-  </nav>
-</header>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="side-logo" href="index.html">ノーブレーキ<br>おうえんサイト</a>
+    <nav class="side-nav">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT<small>ノーブレーキについて</small></a>
+      <a href="origin.html">オリジンアワー</a>
+      <a href="icharibar.html" class="cur">いちゃりば</a>
+      <a href="works.html">活動</a>
+    </nav>
+    <div class="bgm">BGM <button id="bgmOn">ON</button><button id="bgmOff" class="act">OFF</button></div>
+    <audio id="bgm" loop></audio>
+  </aside>
 
-<main class="sec"><div class="wrap">
-  <h2 class="sec-ttl">ラジオ「いちゃりば　いちゃいちゃりばーさいど」</h2>
-  <p class="sec-lead">ラジオ沖縄（ROK）で放送中のノーブレーキの番組。アーカイブ・詳細は準備中です。</p>
-  <p class="pending-box">📻 コンテンツ準備中</p>
-</div></main>
+  <div class="main">
+    <main class="sec"><div class="wrap">
+      <h2 class="sec-ttl">ラジオ「いちゃりば　いちゃいちゃりばーさいど」</h2>
+      <p class="sec-lead">ラジオ沖縄（ROK）で放送中のノーブレーキの番組。アーカイブ・詳細は準備中です。</p>
+      <p class="pending-box">📻 コンテンツ準備中</p>
+    </div></main>
 
-<footer class="foot"><div class="wrap">
-  <p>沖縄芸人コンビ ノーブレーキ 非公式ファンサイト</p>
-  <p class="disc">※当サイトはファンが運営する非公式サイトです。動画はすべてYouTube公式の埋め込みで表示しており、権利は権利者に帰属します。</p>
-</div></footer>
+    <footer class="foot"><div class="wrap">
+      <p>沖縄芸人コンビ ノーブレーキ 非公式ファンサイト</p>
+      <p class="disc">※当サイトはファンが運営する非公式サイトです。動画はすべてYouTube公式の埋め込みで表示しており、権利は権利者に帰属します。</p>
+    </div></footer>
+  </div>
+</div>
 
-<script src="data.js"></script>
-<script src="app.js"></script>
+<script src="data.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
