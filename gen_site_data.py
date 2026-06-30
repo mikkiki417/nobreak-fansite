@@ -79,9 +79,13 @@ def read_json(name, default):
 
 summaries = read_json("summaries.json", {})
 people = read_json("people.json", {"members": [], "staff": []})
+podcast = read_json("podcast.json", {"episodes": []})
+podcast_summaries = read_json("podcast_summaries.json", {})
 
 bundle = {"playlist": PLAYLIST, "episodes": episodes,
-          "summaries": summaries, "people": people}
+          "summaries": summaries, "people": people,
+          "podcast": podcast.get("episodes", []),
+          "podcast_summaries": podcast_summaries}
 site_dir = os.path.dirname(os.path.abspath(__file__))
 with io.open(os.path.join(site_dir, "data.js"), "w", encoding="utf-8") as f:
     f.write("window.DATA = ")

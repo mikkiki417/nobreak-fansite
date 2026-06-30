@@ -130,6 +130,53 @@
         <ul>${(g.items || []).map(i => `<li>${esc(i)}</li>`).join("")}</ul></div>`).join("");
   }
 
+  /* ===== YouTube以前の音源アーカイブ（2014〜2016） =====
+     音源そのものは載せず、日付＋FM那覇 公式バックナンバーへのリンクと、
+     ファンが書いた見出し・あらすじだけを記録として残す。 */
+  const pListEl = $("#podcastList");
+  if (pListEl) {
+    const PSUM = D.podcast_summaries || {};
+    const PODS = (D.podcast || []).map(p => {
+      const s = PSUM[p.date] || {};
+      return Object.assign({}, p, { heading: s.heading || "", summary: s.summary || "" });
+    }).sort((a, b) => a.date.localeCompare(b.date));
+    const pYears = [...new Set(PODS.map(p => p.date.slice(0, 4)))].sort();
+    let pState = "all";
+    const tabsEl = $("#podcastTabs"), pStatsEl = $("#podcastStats");
+    function renderPodTabs() {
+      if (!tabsEl) return;
+      tabsEl.innerHTML = "";
+      const mk = (label, val) => {
+        const b = document.createElement("button");
+        b.className = "tab" + (pState === val ? " active" : "");
+        b.textContent = label; b.onclick = () => { pState = val; renderPods(); };
+        return b;
+      };
+      tabsEl.appendChild(mk("すべて", "all"));
+      pYears.forEach(y => tabsEl.appendChild(mk(y + "年", y)));
+    }
+    function renderPods() {
+      renderPodTabs();
+      const items = PODS.filter(p => pState === "all" || p.date.slice(0, 4) === pState);
+      if (pStatsEl) pStatsEl.textContent = `全${PODS.length}回中 ${items.length}回を表示`
+        + (pState === "all" ? "" : ` ／ ${pState}年`);
+      pListEl.innerHTML = items.map(p => {
+        const hasSum = !!p.summary;
+        return `
+        <div class="prow">
+          <div class="phead">
+            <span class="pdate">${p.date.replace(/-/g, "/")}</span>
+            <a class="plink" href="${esc(p.page)}" target="_blank" rel="noopener">FM那覇 公式ページ ↗</a>
+          </div>
+          ${p.heading ? `<p class="pheading">${esc(p.heading)}</p>` : ""}
+          <p class="psummary ${hasSum ? "" : "pending"}">${hasSum ? esc(p.summary) : "あらすじ準備中…"}</p>
+        </div>`;
+      }).join("");
+      if (!items.length) pListEl.innerHTML = '<p style="color:#b08a63">該当なし</p>';
+    }
+    renderPods();
+  }
+
   /* ===== レトロ アクセスカウンター（トップのみ） ===== */
   const cEl = $("#hitcount");
   if (cEl) {

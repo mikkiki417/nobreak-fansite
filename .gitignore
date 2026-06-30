@@ -4,3 +4,14 @@ nobreak_profile.pdf
 font_compare.html
 .vercel/
 .DS_Store
+# 音源アーカイブ・収集スクリプト類は公開しない（容量・著作権）
+archive/
+*.log
+podcast_catalog.json
+podcast_catalog.py
+podcast_mp3.py
+download_archive.py
+test_reach.py
+probe_recent.py
+process_icons.py
+assets/_orig/
