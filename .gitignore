@@ -15,3 +15,7 @@ test_reach.py
 probe_recent.py
 process_icons.py
 assets/_orig/
+# 文字起こし（音源から生成・非公開。あらすじの元ネタ）
+transcripts/
+batch_transcribe.py
+transcribe.py
