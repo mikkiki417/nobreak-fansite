@@ -161,7 +161,17 @@
       if (pStatsEl) pStatsEl.textContent = `全${PODS.length}回中 ${items.length}回を表示`
         + (pState === "all" ? "" : ` ／ ${pState}年`);
       pListEl.innerHTML = items.map(p => {
-        const hasSum = !!p.summary;
+        // あらすじは文字列（1段落）でも、配列（箇条書き）でも書ける
+        const arr = Array.isArray(p.summary) ? p.summary.filter(Boolean) : null;
+        let sumHtml;
+        if (arr) {
+          sumHtml = arr.length
+            ? `<ul class="psummary">${arr.map(li => `<li>${esc(li)}</li>`).join("")}</ul>`
+            : `<p class="psummary pending">あらすじ準備中…</p>`;
+        } else {
+          const hasSum = !!p.summary;
+          sumHtml = `<p class="psummary ${hasSum ? "" : "pending"}">${hasSum ? esc(p.summary) : "あらすじ準備中…"}</p>`;
+        }
         return `
         <div class="prow">
           <div class="phead">
@@ -169,7 +179,7 @@
             <a class="plink" href="${esc(p.page)}" target="_blank" rel="noopener">FM那覇 公式ページ ↗</a>
           </div>
           ${p.heading ? `<p class="pheading">${esc(p.heading)}</p>` : ""}
-          <p class="psummary ${hasSum ? "" : "pending"}">${hasSum ? esc(p.summary) : "あらすじ準備中…"}</p>
+          ${sumHtml}
         </div>`;
       }).join("");
       if (!items.length) pListEl.innerHTML = '<p style="color:#b08a63">該当なし</p>';
