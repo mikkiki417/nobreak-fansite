@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nobreak-fansite.vercel.app/sitemap.xml
