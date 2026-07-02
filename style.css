@@ -184,6 +184,23 @@ a{color:var(--deep)}
 .hk .hk-date{font-family:var(--disp);font-size:13px;color:var(--deep)}
 .hk .hk-ttl{font-family:var(--disp);font-size:15px;margin:3px 0 5px;color:var(--deep)}
 .hk .hk-body{font-size:13.5px;color:var(--plum);margin:0;line-height:1.85}
+/* 管理人のひとりごと：承認制コメント */
+.hk-cmt{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px}
+.hk-cmt-list{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.hk-cmt-item{font-size:12.5px;background:#fff7ec;border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.hk-cmt-name{font-weight:700;color:var(--deep);margin-right:8px}
+.hk-cmt-name::before{content:"💬 "}
+.hk-cmt-body{color:var(--plum)}
+.hk-cmt-form{display:flex;flex-direction:column;gap:6px}
+.hk-cmt-form input[type="text"],.hk-cmt-form textarea{font:inherit;font-size:12.5px;border:2px solid var(--line);
+  border-radius:8px;padding:6px 9px;background:#fff;color:var(--plum);width:100%}
+.hk-cmt-form textarea{resize:vertical}
+.hk-cmt-form .hk-hp{display:none}
+.hk-cmt-act{display:flex;align-items:center;gap:10px}
+.hk-cmt-form button{font-family:var(--disp);font-size:12px;color:#fff;background:var(--deep);
+  border:0;border-radius:999px;padding:6px 18px;cursor:pointer}
+.hk-cmt-form button:hover{background:var(--pink)}
+.hk-cmt-msg{font-size:11.5px;color:var(--sub)}
 
 /* ===== 最新回（トップ） ===== */
 .latest-ep{max-width:460px;margin:6px auto 4px;background:var(--box);border:2px solid var(--line);

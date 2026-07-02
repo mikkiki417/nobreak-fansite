@@ -213,7 +213,50 @@
         <div class="hk-date">${esc(h.date.replace(/-/g, "/"))}</div>
         ${h.title ? `<p class="hk-ttl">${esc(h.title)}</p>` : ""}
         <p class="hk-body">${esc(h.body).replace(/\n/g, "<br>")}</p>
+        <div class="hk-cmt" data-date="${esc(h.date)}">
+          <div class="hk-cmt-list"></div>
+          <form class="hk-cmt-form">
+            <input type="text" name="name" maxlength="40" placeholder="お名前" required>
+            <input type="text" name="hp" class="hk-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <textarea name="body" maxlength="1000" rows="2" placeholder="コメントを書く（管理人の承認後に表示されます）" required></textarea>
+            <div class="hk-cmt-act"><button type="submit">送信</button><span class="hk-cmt-msg"></span></div>
+          </form>
+        </div>
       </article>`).join("") : '<p style="color:var(--sub)">準備中…</p>';
+
+    // 承認制コメント（Supabase）。hitokoto.html でのみ supabase-js と設定を読み込む
+    if (window.supabase && window.NB_SUPABASE) {
+      const sb = window.supabase.createClient(window.NB_SUPABASE.url, window.NB_SUPABASE.key);
+      hkEl.querySelectorAll(".hk-cmt").forEach(box => {
+        const date = box.getAttribute("data-date");
+        const listEl2 = box.querySelector(".hk-cmt-list");
+        const form = box.querySelector(".hk-cmt-form");
+        const msg = box.querySelector(".hk-cmt-msg");
+        const nameEl = form.querySelector('[name="name"]');
+        const bodyEl = form.querySelector('[name="body"]');
+        const hpEl = form.querySelector('[name="hp"]');
+        async function load() {
+          const { data, error } = await sb.from("nobreak_comments")
+            .select("name,body").eq("entry_date", date).eq("approved", true)
+            .order("created_at", { ascending: true });
+          if (error) return;
+          listEl2.innerHTML = (data || []).map(c =>
+            `<div class="hk-cmt-item"><span class="hk-cmt-name">${esc(c.name)}</span><span class="hk-cmt-body">${esc(c.body).replace(/\n/g, "<br>")}</span></div>`).join("");
+        }
+        load();
+        form.addEventListener("submit", async e => {
+          e.preventDefault();
+          if (hpEl.value) return; // ボット除け
+          const name = nameEl.value.trim(), body = bodyEl.value.trim();
+          if (!name || !body) return;
+          msg.textContent = "送信中…";
+          const { error } = await sb.from("nobreak_comments").insert({ entry_date: date, name, body });
+          if (error) { msg.textContent = "送信に失敗しました。時間をおいて再度お試しください。"; return; }
+          form.reset();
+          msg.textContent = "コメントを受け付けました（管理人の承認後に表示されます）。";
+        });
+      });
+    }
   }
 
   /* ===== レトロ アクセスカウンター（トップのみ） ===== */
