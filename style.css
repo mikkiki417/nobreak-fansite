@@ -174,6 +174,16 @@ a{color:var(--deep)}
 .prow ul.psummary li{margin:3px 0}
 #podcastStats{font-size:12px;color:var(--sub);margin:0 0 12px}
 
+/* ===== 管理人のひとりごと ===== */
+.hitokoto{margin:8px 0 30px}
+.hitokoto .sec-ttl{text-align:center}
+.hk-list{display:flex;flex-direction:column;gap:12px;max-width:660px;margin:0 auto}
+.hk{background:var(--box);border:2px solid var(--line);border-radius:12px;padding:12px 16px;
+  box-shadow:0 3px 0 rgba(221,98,18,.1)}
+.hk .hk-date{font-family:var(--disp);font-size:13px;color:var(--deep)}
+.hk .hk-ttl{font-family:var(--disp);font-size:15px;margin:3px 0 5px;color:var(--deep)}
+.hk .hk-body{font-size:13.5px;color:var(--plum);margin:0;line-height:1.85}
+
 /* ===== プロフィール ===== */
 .gcard{border:2px solid var(--pink);border-radius:14px;padding:20px 22px;background:var(--box);box-shadow:0 4px 0 rgba(221,98,18,.15)}
 .gcard .gname{font-family:var(--disp);font-size:24px;margin:0;color:var(--deep)}

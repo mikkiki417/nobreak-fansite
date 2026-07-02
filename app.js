@@ -187,6 +187,18 @@
     renderPods();
   }
 
+  /* ===== 管理人のひとりごと（トップのみ） ===== */
+  const hkEl = $("#hitokotoList");
+  if (hkEl) {
+    const HK = (D.hitokoto || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+    hkEl.innerHTML = HK.length ? HK.map(h => `
+      <article class="hk">
+        <div class="hk-date">${esc(h.date.replace(/-/g, "/"))}</div>
+        ${h.title ? `<p class="hk-ttl">${esc(h.title)}</p>` : ""}
+        <p class="hk-body">${esc(h.body).replace(/\n/g, "<br>")}</p>
+      </article>`).join("") : '<p style="color:var(--sub)">準備中…</p>';
+  }
+
   /* ===== レトロ アクセスカウンター（トップのみ） ===== */
   const cEl = $("#hitcount");
   if (cEl) {

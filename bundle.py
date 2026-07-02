@@ -16,13 +16,16 @@ summaries = rj("summaries.json", {})
 people = rj("people.json", {"members": [], "staff": []})
 podcast = rj("podcast.json", {"episodes": []}).get("episodes", [])
 podcast_summaries = rj("podcast_summaries.json", {})
+hitokoto = rj("hitokoto.json", {"entries": []}).get("entries", [])
 
 bundle = {"playlist": PLAYLIST, "episodes": episodes,
           "summaries": summaries, "people": people,
-          "podcast": podcast, "podcast_summaries": podcast_summaries}
+          "podcast": podcast, "podcast_summaries": podcast_summaries,
+          "hitokoto": hitokoto}
 with io.open(os.path.join(BASE, "data.js"), "w", encoding="utf-8") as f:
     f.write("window.DATA = ")
     f.write(json.dumps(bundle, ensure_ascii=False))
     f.write(";\n")
 print("data.js 生成: episodes", len(episodes), "/ podcast", len(podcast),
-      "/ summaries", len(summaries), "/ podcast_summaries", len(podcast_summaries))
+      "/ summaries", len(summaries), "/ podcast_summaries", len(podcast_summaries),
+      "/ hitokoto", len(hitokoto))
