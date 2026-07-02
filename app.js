@@ -187,6 +187,20 @@
     renderPods();
   }
 
+  /* ===== 最新回（トップ・データ内で一番新しい回を自動表示） ===== */
+  const leEl = $("#latestEp");
+  if (leEl && (D.episodes || []).length) {
+    const latest = D.episodes.reduce((a, b) => (b.date > a.date ? b : a));
+    leEl.innerHTML = `
+      <p class="le-label">▶ 最新回はこちら</p>
+      <div class="le-frame">
+        <iframe src="https://www.youtube.com/embed/${latest.videoId}" title="${esc(latest.title)}"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="le-meta">${latest.date.replace(/-/g, "/")}
+        <a href="https://www.youtube.com/watch?v=${latest.videoId}" target="_blank" rel="noopener">YouTubeで見る ↗</a></p>`;
+  }
+
   /* ===== 管理人のひとりごと（専用ページ） ===== */
   const hkEl = $("#hitokotoList");
   if (hkEl) {
