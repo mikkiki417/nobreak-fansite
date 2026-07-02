@@ -2,6 +2,16 @@
   const D = window.DATA || {};
   const $ = s => document.querySelector(s);
   const esc = s => (s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  // あらすじは文字列（1段落）でも配列（箇条書き）でも書ける
+  const summaryHtml = (summary, cls) => {
+    const arr = Array.isArray(summary) ? summary.filter(Boolean) : null;
+    if (arr) return arr.length
+      ? `<ul class="${cls}">${arr.map(li => `<li>${esc(li)}</li>`).join("")}</ul>`
+      : `<p class="${cls} pending">あらすじ準備中…</p>`;
+    return summary
+      ? `<p class="${cls}">${esc(summary)}</p>`
+      : `<p class="${cls} pending">あらすじ準備中…</p>`;
+  };
 
   /* ===== エピソード一覧（オリジンアワーのページ） ===== */
   const listEl = $("#list");
@@ -58,7 +68,6 @@
     function card(e) {
       const div = document.createElement("article");
       div.className = "card";
-      const hasSum = !!e.summary;
       div.innerHTML = `
         <div class="thumb" data-vid="${e.videoId}">
           <img loading="lazy" src="https://i.ytimg.com/vi/${e.videoId}/hqdefault.jpg" alt="">
@@ -67,7 +76,7 @@
         <div class="body">
           <div class="date">${e.date.replace(/-/g, "/")}</div>
           ${e.heading ? `<p class="heading">${esc(e.heading)}</p>` : `<p class="ttl">${esc(e.title)}</p>`}
-          <p class="summary ${hasSum ? "" : "pending"}">${hasSum ? esc(e.summary) : "あらすじ準備中…"}</p>
+          ${summaryHtml(e.summary, "summary")}
           <div class="tags">${(e.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
           <a class="ytlink" href="https://www.youtube.com/watch?v=${e.videoId}" target="_blank" rel="noopener">▶ YouTubeで見る</a>
         </div>`;
@@ -161,17 +170,7 @@
       if (pStatsEl) pStatsEl.textContent = `全${PODS.length}回中 ${items.length}回を表示`
         + (pState === "all" ? "" : ` ／ ${pState}年`);
       pListEl.innerHTML = items.map(p => {
-        // あらすじは文字列（1段落）でも、配列（箇条書き）でも書ける
-        const arr = Array.isArray(p.summary) ? p.summary.filter(Boolean) : null;
-        let sumHtml;
-        if (arr) {
-          sumHtml = arr.length
-            ? `<ul class="psummary">${arr.map(li => `<li>${esc(li)}</li>`).join("")}</ul>`
-            : `<p class="psummary pending">あらすじ準備中…</p>`;
-        } else {
-          const hasSum = !!p.summary;
-          sumHtml = `<p class="psummary ${hasSum ? "" : "pending"}">${hasSum ? esc(p.summary) : "あらすじ準備中…"}</p>`;
-        }
+        const sumHtml = summaryHtml(p.summary, "psummary");
         return `
         <div class="prow">
           <div class="phead">
@@ -191,6 +190,8 @@
   const leEl = $("#latestEp");
   if (leEl && (D.episodes || []).length) {
     const latest = D.episodes.reduce((a, b) => (b.date > a.date ? b : a));
+    const ls = (D.summaries || {})[latest.videoId] || {};
+    const hasLsSum = Array.isArray(ls.summary) ? ls.summary.length : !!ls.summary;
     leEl.innerHTML = `
       <p class="le-label">▶ 最新回はこちら</p>
       <div class="le-frame">
@@ -198,7 +199,9 @@
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
       <p class="le-meta">${latest.date.replace(/-/g, "/")}
-        <a href="https://www.youtube.com/watch?v=${latest.videoId}" target="_blank" rel="noopener">YouTubeで見る ↗</a></p>`;
+        <a href="https://www.youtube.com/watch?v=${latest.videoId}" target="_blank" rel="noopener">YouTubeで見る ↗</a></p>
+      ${ls.heading ? `<p class="le-heading">${esc(ls.heading)}</p>` : ""}
+      ${hasLsSum ? summaryHtml(ls.summary, "le-sum") : ""}`;
   }
 
   /* ===== 管理人のひとりごと（専用ページ） ===== */
