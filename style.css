@@ -38,6 +38,7 @@ a{color:var(--deep)}
 .side-nav a[href="podcast.html"]::before{background-image:url("assets/dot5.png")}
 .side-nav a[href="icharibar.html"]::before{background-image:url("assets/dot5.png")}
 .side-nav a[href="works.html"]::before{background-image:url("assets/dot2.png")}
+.side-nav a[href="hitokoto.html"]::before{content:"✎";background:none;width:auto;height:auto;font-size:20px;line-height:1}
 .side-nav a:hover{background:repeating-linear-gradient(45deg,#fff,#fff 7px,#ffd6a8 7px,#ffd6a8 14px);transform:translateY(-1px)}
 .side-nav a.cur{outline:3px solid var(--pink);outline-offset:1px}
 .side-nav a small{display:block;font-weight:400;font-size:10px;color:var(--plum);margin-top:1px}

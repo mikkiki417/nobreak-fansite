@@ -187,7 +187,7 @@
     renderPods();
   }
 
-  /* ===== 管理人のひとりごと（トップのみ） ===== */
+  /* ===== 管理人のひとりごと（専用ページ） ===== */
   const hkEl = $("#hitokotoList");
   if (hkEl) {
     const HK = (D.hitokoto || []).slice().sort((a, b) => b.date.localeCompare(a.date));
