@@ -1,0 +1,45 @@
+name: update-latest-episode
+
+# 週1で「ノーブレーキのオリジンアワー」の新しい回をYouTubeから取り込む。
+# 番組は火曜放送なので、水・木の朝(JST)にチェック。手動実行も可(workflow_dispatch)。
+on:
+  schedule:
+    - cron: "0 21 * * 2,3"   # 火・水 21:00 UTC = 水・木 06:00 JST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-latest
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install yt-dlp
+        run: pip install -U yt-dlp
+
+      - name: fetch latest & rebuild data.js
+        run: |
+          python update_latest.py
+          python bundle.py
+
+      - name: commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "no changes"
+          else
+            git add -A
+            git commit -m "最新回を自動追加 (GitHub Actions)"
+            git push
+          fi
