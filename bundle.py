@@ -12,6 +12,16 @@ def rj(name, default):
         return default
 
 episodes = rj("episodes.json", {}).get("episodes", [])
+# 手動追加ぶんを日付マージ（source優先。sourceに無い日付だけ足す）
+_manual = rj("episodes_manual.json", {"episodes": []}).get("episodes", [])
+_seen = {e["date"] for e in episodes}
+for _m in _manual:
+    if _m.get("date") and _m["date"] not in _seen:
+        _m.setdefault("year", int(_m["date"][:4]))
+        _m.setdefault("guest", "")
+        _m.setdefault("tags", [str(_m["year"])])
+        episodes.append(_m); _seen.add(_m["date"])
+episodes.sort(key=lambda e: e["date"])
 summaries = rj("summaries.json", {})
 people = rj("people.json", {"members": [], "staff": []})
 podcast = rj("podcast.json", {"episodes": []}).get("episodes", [])

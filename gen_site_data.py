@@ -67,6 +67,20 @@ for d, i, t, s in merged:
         "tags": auto_tags(t, d),
     })
 
+# 手動追加ぶんを日付マージ（source優先。sourceに無い日付だけ足す）
+try:
+    _manual = json.load(io.open(os.path.join(OUT, "episodes_manual.json"), encoding="utf-8-sig")).get("episodes", [])
+except FileNotFoundError:
+    _manual = []
+_seen = {e["date"] for e in episodes}
+for _m in _manual:
+    if _m.get("date") and _m["date"] not in _seen:
+        _m.setdefault("year", int(_m["date"][:4]))
+        _m.setdefault("guest", "")
+        _m.setdefault("tags", [str(_m["year"])])
+        episodes.append(_m); _seen.add(_m["date"])
+episodes.sort(key=lambda e: e["date"])
+
 data = {"playlist": PLAYLIST, "count": len(episodes), "episodes": episodes}
 os.makedirs(OUT, exist_ok=True)
 json.dump(data, io.open(os.path.join(OUT, "episodes.json"), "w", encoding="utf-8"),
