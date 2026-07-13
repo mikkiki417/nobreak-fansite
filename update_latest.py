@@ -40,8 +40,10 @@ def load_json(path, default):
 def fetch(url):
     try:
         out = subprocess.check_output(
-            ["yt-dlp", "-J", "--flat-playlist", "--playlist-end", str(LIMIT), url],
-            stderr=subprocess.DEVNULL, text=True)
+            ["yt-dlp", "-J", "--flat-playlist", "--playlist-end", str(LIMIT),
+             "--extractor-args", "youtube:lang=ja",  # 英訳タイトルだと「ノーブレーキ」判定に落ちる
+             url],
+            stderr=subprocess.DEVNULL, text=True, encoding="utf-8")
         return json.loads(out).get("entries", []) or []
     except Exception as e:
         print("fetch fail:", url, e)
