@@ -25,7 +25,7 @@
           tagBarEl = $("#tagBar"), statsEl = $("#stats");
     if ($("#playlistLink")) $("#playlistLink").href = D.playlist || "#";
 
-    let state = { year: "all", tag: null, q: "" };
+    let state = { year: "all", tag: null, q: "", sort: "asc" };
     const years = [...new Set(EPS.map(e => e.year))].sort();
 
     function renderTabs() {
@@ -93,6 +93,7 @@
     function render() {
       renderTabs(); renderTags();
       const items = filtered();
+      if (state.sort === "desc") items.reverse();
       statsEl.textContent = `全${EPS.length}回中 ${items.length}回を表示`
         + (state.tag ? ` ／ タグ「${state.tag}」` : "") + (state.q ? ` ／ 検索「${state.q}」` : "");
       listEl.innerHTML = "";
@@ -102,6 +103,15 @@
       if (!items.length) listEl.innerHTML = '<p style="color:#a8748c">該当する回がありません。</p>';
     }
     if (searchEl) searchEl.addEventListener("input", () => { state.q = searchEl.value; render(); });
+    const sortOldBtn = $("#sortOld"), sortNewBtn = $("#sortNew");
+    function setSort(dir) {
+      state.sort = dir;
+      if (sortOldBtn) sortOldBtn.classList.toggle("active", dir === "asc");
+      if (sortNewBtn) sortNewBtn.classList.toggle("active", dir === "desc");
+      render();
+    }
+    if (sortOldBtn) sortOldBtn.onclick = () => setSort("asc");
+    if (sortNewBtn) sortNewBtn.onclick = () => setSort("desc");
     if ($("#randomBtn")) $("#randomBtn").addEventListener("click", () => {
       const pool = filtered(); if (!pool.length) return;
       const e = pool[Math.floor(Math.random() * pool.length)];
