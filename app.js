@@ -37,7 +37,7 @@
         return b;
       };
       yearTabsEl.appendChild(mk("すべて", "all"));
-      years.forEach(y => yearTabsEl.appendChild(mk(y + "年", y)));
+      [...years].reverse().forEach(y => yearTabsEl.appendChild(mk(y + "年", y)));
     }
     const tagCount = {};
     EPS.forEach(e => (e.tags || []).forEach(t => { if (!/^\d{4}$/.test(t)) tagCount[t] = (tagCount[t] || 0) + 1; }));
