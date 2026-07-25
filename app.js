@@ -13,6 +13,29 @@
       : `<p class="${cls} pending">あらすじ準備中…</p>`;
   };
 
+  /* ===== モバイル用ハンバーガーメニュー（全ページ共通） ===== */
+  const sidebar = document.querySelector(".sidebar");
+  if (sidebar && !sidebar.querySelector(".hamburger")) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "hamburger";
+    btn.setAttribute("aria-label", "メニューを開閉");
+    btn.setAttribute("aria-expanded", "false");
+    btn.innerHTML = "<span></span><span></span><span></span>";
+    const logo = sidebar.querySelector(".side-logo");
+    if (logo && logo.nextSibling) sidebar.insertBefore(btn, logo.nextSibling);
+    else sidebar.insertBefore(btn, sidebar.firstChild);
+    btn.addEventListener("click", () => {
+      const open = sidebar.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    sidebar.querySelectorAll(".side-nav a").forEach(a =>
+      a.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+      }));
+  }
+
   /* ===== エピソード一覧（オリジンアワーのページ） ===== */
   const listEl = $("#list");
   if (listEl) {

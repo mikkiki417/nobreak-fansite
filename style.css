@@ -17,6 +17,7 @@ body{
 }
 a{color:var(--deep)}
 .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.nowrap{white-space:nowrap}
 
 /* ===== 左サイドバー（平成フレーム風・全ページ共通） ===== */
 .layout{display:flex;align-items:stretch;min-height:100vh}
@@ -45,15 +46,25 @@ a{color:var(--deep)}
 .bgm{margin-top:26px;text-align:center;font-size:13px;color:#ffd9a8;letter-spacing:.08em}
 .bgm button{background:none;border:0;color:#ffd9a8;font-weight:700;cursor:pointer;font-size:15px;padding:2px 5px;font-family:var(--pixel)}
 .bgm button.act{color:#ffb35c;text-decoration:underline}
+.hamburger{display:none}
 @media(max-width:760px){
   .layout{flex-direction:column}
-  .sidebar{flex:none;width:auto;min-height:0;position:static;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-  .side-logo{margin:0 10px 0 0;font-size:12px}
-  .side-nav{flex-direction:row;flex-wrap:wrap;gap:8px}
-  .side-nav a{padding:7px 12px}
-  .side-nav a::before{display:inline-block;width:20px;height:20px;margin:0 5px 0 0;vertical-align:middle}
-  .side-nav a small{display:none}
-  .bgm{margin:0 0 0 auto}
+  .sidebar{flex:none;width:auto;min-height:0;position:sticky;top:0;z-index:100;
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:9px 14px}
+  .side-logo{margin:0 auto 0 0;font-size:12px;text-align:left}
+  .hamburger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
+    width:44px;height:38px;background:none;border:2px solid #d9a86e;border-radius:8px;cursor:pointer;padding:0}
+  .hamburger span{display:block;width:22px;height:2.5px;background:#ffd9a8;border-radius:2px;transition:.2s}
+  .sidebar.open .hamburger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .sidebar.open .hamburger span:nth-child(2){opacity:0}
+  .sidebar.open .hamburger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .side-nav{flex-basis:100%;flex-direction:column;gap:8px;display:none;order:5;margin-top:4px}
+  .sidebar.open .side-nav{display:flex}
+  .side-nav a{padding:10px 14px;text-align:left}
+  .side-nav a::before{display:inline-block;width:22px;height:22px;margin:0 8px 0 0;vertical-align:middle}
+  .side-nav a small{display:inline;font-size:10px;margin-left:6px;color:var(--sub)}
+  .bgm{flex-basis:100%;display:none;order:6;margin:2px 0 0;text-align:left}
+  .sidebar.open .bgm{display:block}
 }
 
 /* ===== カバー ===== */
