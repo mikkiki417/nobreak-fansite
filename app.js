@@ -68,6 +68,8 @@
     function card(e) {
       const div = document.createElement("article");
       div.className = "card";
+      // あらすじが3項目以上あるときだけ畳んで「続きを読む」で展開
+      const clampable = Array.isArray(e.summary) && e.summary.filter(Boolean).length > 2;
       div.innerHTML = `
         <div class="thumb" data-vid="${e.videoId}">
           <img loading="lazy" src="https://i.ytimg.com/vi/${e.videoId}/hqdefault.jpg" alt="">
@@ -76,12 +78,22 @@
         <div class="body">
           <div class="date">${e.date.replace(/-/g, "/")}</div>
           ${e.heading ? `<p class="heading">${esc(e.heading)}</p>` : `<p class="ttl">${esc(e.title)}</p>`}
-          ${summaryHtml(e.summary, "summary")}
+          <div class="sumbox${clampable ? " clamped" : ""}">
+            ${summaryHtml(e.summary, "summary")}
+            ${clampable ? `<button class="more" type="button">…続きを読む</button>` : ""}
+          </div>
           <div class="tags">${(e.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
           <a class="ytlink" href="https://www.youtube.com/watch?v=${e.videoId}" target="_blank" rel="noopener">▶ YouTubeで見る</a>
         </div>`;
       div.querySelector(".thumb").onclick = function () {
         this.innerHTML = `<iframe src="https://www.youtube.com/embed/${e.videoId}?autoplay=1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      };
+      const moreBtn = div.querySelector(".more");
+      if (moreBtn) moreBtn.onclick = ev => {
+        ev.stopPropagation();
+        const box = moreBtn.closest(".sumbox");
+        const nowClamped = box.classList.toggle("clamped");
+        moreBtn.textContent = nowClamped ? "…続きを読む" : "閉じる";
       };
       div.querySelectorAll(".tag").forEach(tg => tg.onclick = ev => {
         ev.stopPropagation(); const t = tg.textContent.replace(/\s*\(\d+\)$/, "");
