@@ -76,8 +76,8 @@
           <div class="play">▶</div>
         </div>
         <div class="body">
-          <div class="date">${e.date.replace(/-/g, "/")}</div>
           ${e.heading ? `<p class="heading">${esc(e.heading)}</p>` : `<p class="ttl">${esc(e.title)}</p>`}
+          <div class="date">${e.date.replace(/-/g, "/")}</div>
           <div class="sumbox${clampable ? " clamped" : ""}">
             ${summaryHtml(e.summary, "summary")}
             ${clampable ? `<button class="more" type="button">…続きを読む</button>` : ""}
