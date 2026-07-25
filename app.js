@@ -25,7 +25,7 @@
           tagBarEl = $("#tagBar"), statsEl = $("#stats");
     if ($("#playlistLink")) $("#playlistLink").href = D.playlist || "#";
 
-    let state = { year: "all", tag: null, q: "", sort: "asc" };
+    let state = { year: "all", tag: null, q: "", sort: "desc" };
     const years = [...new Set(EPS.map(e => e.year))].sort();
 
     function renderTabs() {
