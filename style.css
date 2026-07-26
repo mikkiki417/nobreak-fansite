@@ -49,8 +49,8 @@ a{color:var(--deep)}
 .hamburger{display:none}
 @media(max-width:760px){
   .layout{flex-direction:column}
-  .sidebar{flex:none;width:auto;min-height:0;position:sticky;top:0;z-index:100;
-    display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:9px 14px}
+  .sidebar{flex:none;width:100%;align-self:stretch;min-height:0;position:sticky;top:0;z-index:100;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:9px 14px}
   .side-logo{margin:0;font-size:12px;text-align:left}
   .hamburger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
     margin-left:auto;
