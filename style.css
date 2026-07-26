@@ -118,8 +118,7 @@ a{color:var(--deep)}
 .sec{padding:46px 0}
 .sec.alt{background:rgba(255,255,255,.45)}
 .sec-ttl{font-family:var(--disp);font-size:clamp(20px,2.6vw,28px);font-weight:400;margin:0 0 10px;
-  color:var(--deep);display:inline-block;
-  background:linear-gradient(transparent 62%, var(--yellow) 62%);padding:0 6px}
+  color:var(--deep)}
 .sec-ttl::before{content:"❀ "}
 .sub-ttl{font-family:var(--disp);font-size:17px;font-weight:400;margin:36px 0 14px;color:var(--deep)}
 .sub-ttl::before{content:"♪ "}
