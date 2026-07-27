@@ -215,6 +215,7 @@
       if (pStatsEl) pStatsEl.textContent = `全${PODS.length}回中 ${items.length}回を表示`
         + (pState === "all" ? "" : ` ／ ${pState}年`);
       pListEl.innerHTML = items.map(p => {
+        const clampable = Array.isArray(p.summary) && p.summary.filter(Boolean).length > 2;
         const sumHtml = summaryHtml(p.summary, "psummary");
         return `
         <div class="prow">
@@ -223,10 +224,18 @@
             <a class="plink" href="${esc(p.page)}" target="_blank" rel="noopener">FM那覇 公式ページ ↗</a>
           </div>
           ${p.heading ? `<p class="pheading">${esc(p.heading)}</p>` : ""}
-          ${sumHtml}
+          <div class="sumbox${clampable ? " clamped" : ""}">
+            ${sumHtml}
+            ${clampable ? `<button class="more" type="button">…続きを読む</button>` : ""}
+          </div>
         </div>`;
       }).join("");
       if (!items.length) pListEl.innerHTML = '<p style="color:#b08a63">該当なし</p>';
+      pListEl.querySelectorAll(".more").forEach(btn => btn.onclick = () => {
+        const box = btn.closest(".sumbox");
+        const nowClamped = box.classList.toggle("clamped");
+        btn.textContent = nowClamped ? "…続きを読む" : "閉じる";
+      });
     }
     renderPods();
   }
